@@ -1,26 +1,40 @@
 <section class="todoapp">
   <header class="header">
-    <h1>questions</h1>
+    <h1>checking items</h1>
+    <h2>是否為有效的問題?</h2>
+    <!--
+    <h2 *ngIf="!nodata">{{ item.category }}</h2>
+    -->
   </header>
   <!-- This section should be hidden by default and shown when there are todos -->
   <section class="main">
-    <ul class="todo-list">
+    <ul class="todo-list" *ngIf="!nodata; else nodataTemplate">
       <li>
         <div class="view">
           <div style="flex:4">
-            <label >我想去東京自由行，怎麼安排行程比較好?</label>
+            <label>{{ item.question }}</label>
           </div>
           <div style="flex:1">
-            <button class="valid" title="Match"></button>
-            <button class="destroy" title="Not Match"></button>
+            <button class="valid" title="Match" (click)="valid(item)"></button>
+            <button class="destroy" title="Not Match" (click)="invalid(item)"></button>
           </div>
         </div>
       </li>
     </ul>
   </section>
-  <!-- This footer should hidden by default and shown when there are todos -->
-  <footer class="footer">
-  </footer>
+  <ng-template #nodataTemplate>
+      <ul class="todo-list">
+        <li>
+          <div class="view">
+            <div>
+              <label>
+                  no data
+              </label>
+            </div>
+          </div>
+        </li>
+      </ul>
+  </ng-template>
 </section>
 <footer class="info">
   <p>Click the buttons to check the above items.</p>
